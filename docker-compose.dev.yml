@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  account_center_db:
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: dbuser
+      POSTGRES_PASSWORD: dbpassword
+      POSTGRES_DB: account_center_dev
+    volumes:
+      - account_center_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    networks:
+      - account_center-networks
+
+volumes:
+  account_center_data:
+
+networks:
+  account_center-networks:
+    driver: bridge
