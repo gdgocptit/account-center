@@ -18,10 +18,13 @@ defmodule AccountCenterWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :home
+  end
 
-    scope "/users" do
-      get "/login", UsersController, :login
-    end
+  scope "/users", AccountCenterWeb do
+    pipe_through :browser
+
+    get "/login", UsersController, :login
+    post "/login", UsersController, :create_session
   end
 
   # Other scopes may use custom stacks.
