@@ -30,7 +30,12 @@ defmodule AccountCenter.User do
   defp put_password_hash(changeset) do
     case changeset do
       %Ecto.Changeset{valid?: true, changes: %{password: password}} ->
-        put_change(changeset, :password_digest, Argon2.Base.hash_password(password, Argon2.Base.gen_salt))
+        put_change(
+          changeset,
+          :password_digest,
+          Argon2.Base.hash_password(password, Argon2.Base.gen_salt())
+        )
+
       _ ->
         changeset
     end
